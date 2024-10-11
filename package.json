@@ -1,8 +1,12 @@
 {
-  "name": "vscode-tweet",
-  "displayName": "vscode-tweet",
+  "name": "vscode-tweeter",
+  "displayName": "vscode-tweeter",
   "description": "Write and publish tweets to X directly from vscode",
   "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/BullishVince/vscode-tweeter"
+  },
+  "publisher": "BullishLife",
   "engines": {
     "vscode": "^1.94.0"
   },
@@ -14,7 +18,7 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "vscode-tweet Settings",
+      "title": "vscode-tweeter Settings",
       "properties": {
         "vscodeTweetPublisher.appKey": {
           "type": "string",
@@ -38,9 +42,30 @@
         }
       }
     },
+    "views": {
+      "explorer": [
+        {
+          "id": "twitterPublisherConfig",
+          "name": "Twitter Publisher",
+          "when": "view == twitterPublisher"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "twitterPublisher",
+          "title": "Twitter Publisher",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "activationEvents": [
+      "onView:twitterPublisherConfig"
+    ],
     "commands": [
       {
-        "command": "vscode-tweet.publishTweet",
+        "command": "vscode-tweeter.publishTweet",
         "title": "Publish Tweet"
       }
     ]
