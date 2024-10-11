@@ -5,16 +5,38 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
     "vscode-tweet.publishTweet",
     async () => {
+      // Retrieve the API keys from the settings
+      const appKey = vscode.workspace
+        .getConfiguration("vscodeTweetPublisher")
+        .get<string>("appKey");
+      const appSecret = vscode.workspace
+        .getConfiguration("vscodeTweetPublisher")
+        .get<string>("appSecret");
+      const accessToken = vscode.workspace
+        .getConfiguration("vscodeTweetPublisher")
+        .get<string>("accessToken");
+      const accessSecret = vscode.workspace
+        .getConfiguration("vscodeTweetPublisher")
+        .get<string>("accessSecret");
+
+      // Check if all required keys are available
+      if (!appKey || !appSecret || !accessToken || !accessSecret) {
+        vscode.window.showErrorMessage(
+          "Please configure Twitter API keys in the settings."
+        );
+        return;
+      }
+
       const tweet = await vscode.window.showInputBox({
         prompt: "Enter your tweet",
       });
       if (tweet) {
         try {
           const client = new TwitterApi({
-            appKey: "YOUR_API_KEY",
-            appSecret: "YOUR_API_SECRET",
-            accessToken: "YOUR_ACCESS_TOKEN",
-            accessSecret: "YOUR_ACCESS_SECRET",
+            appKey,
+            appSecret,
+            accessToken,
+            accessSecret,
           });
 
           const rwClient = client.readWrite;

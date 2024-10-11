@@ -12,11 +12,33 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "vscode-tweet Settings",
+      "properties": {
+        "vscodeTweetPublisher.appKey": {
+          "type": "string",
+          "default": "",
+          "description": "Twitter API Key"
+        },
+        "vscodeTweetPublisher.appSecret": {
+          "type": "string",
+          "default": "",
+          "description": "Twitter API Secret Key"
+        },
+        "vscodeTweetPublisher.accessToken": {
+          "type": "string",
+          "default": "",
+          "description": "Twitter Access Token"
+        },
+        "vscodeTweetPublisher.accessSecret": {
+          "type": "string",
+          "default": "",
+          "description": "Twitter Access Token Secret"
+        }
+      }
+    },
     "commands": [
-      {
-        "command": "vscode-tweet.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "vscode-tweet.publishTweet",
         "title": "Publish Tweet"
